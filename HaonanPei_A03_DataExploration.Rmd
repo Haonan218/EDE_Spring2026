@@ -269,7 +269,7 @@ ggplot(Litter, aes(x = functionalGroup, y = dryMass)) +
 ```
 
 > Why is the boxplot a more effective visualization option than the violin plot in this case?
-> Answer: The boxplot is more effective because it contains the median, the spread, and the outlier of dry mass for each functional group, while the violin plot is greatly influnced by the outliers and doesn't well present the spread of the dry mass for eah functional group.
+> Answer: The boxplot is more effective because it contains the median, the spread, and the outlier of dry mass for each functional group, while the violin plot is greatly influnced by the outliers and doesn't well present the spread of the dry mass for each functional group.
 
 
 > What type(s) of litter tend to have the highest biomass at these sites?
