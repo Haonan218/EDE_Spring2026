@@ -1,3 +1,0 @@
-"0","#Create a bar plot showing the count of samples by day of week"
-"0","ggplot(sites,aes(x=dow)) +"
-"0","  geom_bar()"
