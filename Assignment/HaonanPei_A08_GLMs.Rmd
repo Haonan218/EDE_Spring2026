@@ -2,9 +2,12 @@
 title: "Assignment 8: GLMs (Linear Regressios, ANOVA, & t-tests)"
 author: "Haonan Pei"
 date: "Spring 2026"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 geometry: margin=2.54cm
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
