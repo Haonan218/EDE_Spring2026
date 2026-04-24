@@ -1,5 +1,5 @@
 ---
-title: 'Course Project'
+title: "Course Project - Rooftop Solar Potential's Correlation with Income Level or Other Socioeconomic Factors"
 author: Haonan Pei
 date: "Spring 2026"
 output: pdf_document
@@ -29,14 +29,15 @@ This study aims to answer the following questions:
 
 ## Methodology
 ### Data Source
+
 This study uses the REPLICA dataset developed by the National Renewable Energy Laboratory (NREL), which provides estimates of rooftop solar technical potential at the census tract level.
 
 The dataset includes:
-- Solar capacity potential (MW)
-- Median household income ($)
-- Average cost of electricity ($/kWh)
-- Gini index (income inequality)
-- Population
+1. Solar capacity potential (MW)
+2. Median household income (dollar)
+3. Average cost of electricity (dollar/kWh)
+4. Gini index (income inequality)
+5. Population
 
 The analysis focuses on North Carolina and aggregates tract-level data to the county level.
 
@@ -49,23 +50,27 @@ The dataset is filtered from the original version before loading into the analys
 | Source   | National Laboratory Of The Rockies  |
 
 ### Data Processing
+
 The dataset was filtered to include only North Carolina census tracts. Solar potential was calculated for different income groups by summing capacity estimates across building types and tenure categories.
 
 Tract-level data were aggregated to the county level by:
-- Summing total solar capacity and population
-- Computing population-weighted averages for income, electricity price, and Gini index
-Solar potential was normalized by population to obtain capacity per capita.
+- Summing total solar capacity and population;
+- Computing population-weighted averages for income, electricity price, and Gini index;
+- Solar potential was normalized by population to obtain capacity per capita.
 
 ## Analysis
-```{r}
+```{r, echo=FALSE}
 # Import libraries
 library(tidyverse)
 library(here)
 library(knitr)
 library(ggplot2)
+```
 
+```{r}
 # Import dataset
-replica_data <- read.csv(here("Assignment", "Course Project", "REPLICA Filtered Dataset.csv"),stringsAsFactors = TRUE)
+replica_data <- read.csv(here("Assignment",
+"Course Project", "REPLICA Filtered Dataset.csv"),stringsAsFactors = TRUE)
 
 # Data Processing
 ## 1.Select NC as the target state for analysis.
@@ -159,7 +164,7 @@ ggplot(nc_county, aes(x = avg_income, y = capacity_per_capita)) +
 
 The results indicate a statistically significant positive relationship between income and solar potential (p < 0.01). Specifically, counties with higher average household incomes tend to have greater solar potential per capita.
 
-However, the explanatory power of the model is modest (R² ≈ 0.10), suggesting that income alone accounts for only a limited portion of the variation in solar potential across counties. This implies that while income is an important factor, other structural and geographic characteristics likely play a more substantial role in determining solar potential.
+However, the explanatory power of the model is modest (R-squared is approximately 0.10), suggesting that income alone accounts for only a limited portion of the variation in solar potential across counties. This implies that while income is an important factor, other structural and geographic characteristics likely play a more substantial role in determining solar potential.
 
 ```{r}
 # Linear regression 2
@@ -171,12 +176,12 @@ potential_gini_lm <- lm(capacity_per_capita ~ avg_gini, data = nc_county)
 summary(potential_gini_lm)
 ```
 ### Electricity Cost and Solar Potential
-The results show no statistically significant relationship between electricity cost and solar potential (p = 0.71), and the model explains virtually none of the variation in the data (R² ≈ 0.001).
+The results show no statistically significant relationship between electricity cost and solar potential (p = 0.71), and the model explains virtually none of the variation in the data (R-squared is approximately 0.001).
 
 This finding is consistent with expectations, as the dataset used in this analysis measures technical solar potential rather than actual solar adoption. While electricity prices may influence households’ decisions to install solar systems, they do not affect the physical characteristics of buildings, such as rooftop size or solar suitability.
 
 ### Income Inequality and Solar Potential
-The results indicate that the Gini index is not a statistically significant predictor of solar potential (p = 0.25), and the explanatory power of the model is very low (R² ≈ 0.01).
+The results indicate that the Gini index is not a statistically significant predictor of solar potential (p = 0.25), and the explanatory power of the model is very low (R-squared is approximately 0.01).
 
 This relationship is weak and not statistically distinguishable from zero, which is consistent with the nature of the dataset, as income inequality is more likely to influence access to solar adoption rather than the underlying physical potential for solar generation.
 
@@ -191,16 +196,17 @@ summary(model_full)
 
 To further examine the combined effects of socioeconomic factors, a multivariate regression model was estimated including average income, electricity cost, and the Gini index. The results show that average household income remains the only statistically significant predictor of rooftop solar potential per capita (p < 0.01), while electricity price and income inequality remain insignificant.
 
-The model explains approximately 10% of the variation in solar potential (R² ≈ 0.10), which is only slightly higher than the income-only model. The relatively low explanatory power of the model suggests that additional variables—such as housing characteristics, urban density, and land use patterns—likely play a more important role in determining solar potential.
+The model explains approximately 10% of the variation in solar potential (R-squared is approximately 0.10), which is only slightly higher than the income-only model. The relatively low explanatory power of the model suggests that additional variables—such as housing characteristics, urban density, and land use patterns—likely play a more important role in determining solar potential.
 
 Overall, the results highlight that solar potential disparities are more closely related to structural and geographic factors, with income acting as a proxy for these underlying conditions.
 
 
 ## Conclusion
 This study finds that:
-1.Income is positively associated with rooftop solar potential per capita/
 
-2.Electricity price and income inequality are not significant predictors/
+1.Income is positively associated with rooftop solar potential per capita;
+
+2.Electricity price and income inequality are not significant predictors;
 
 These findings indicate that the socioeconomic factors such as income level, energy cost, and economical inequities are not sufficient in evaluating solar energy potential and designing equitable energy policies. The technical parameters and limitations are obligatorily required to incorporate into further analysis.
 
