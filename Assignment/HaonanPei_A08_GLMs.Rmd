@@ -1,5 +1,5 @@
 ---
-title: "Assignment 8: GLMs (Linear Regressios, ANOVA, & t-tests)"
+title: "Assignment 8: GLMs (Linear Regressions, ANOVA, & t-tests)"
 author: "Haonan Pei"
 date: "Spring 2026"
 output:
